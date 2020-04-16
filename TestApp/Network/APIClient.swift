@@ -13,7 +13,7 @@ class APIClient {
     
     static func auth(completion:@escaping ((Result<String, Error>))->Void) {
         
-        AF.request(AuthEndPoint.auth).responseString {(response) in
+        AF.request(SourcesEndPoint.sources).responseString {(response) in
             print("\(response)")
         }
     }

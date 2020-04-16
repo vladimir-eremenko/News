@@ -10,7 +10,7 @@ import Foundation
 
 struct ApiStruct {
     struct ProductionServer {
-        static let baseURL = "http://newsapi.org"
+        static let baseURL = "http://newsapi.org/v2"
     }
     
     struct APIParameterKey {
