@@ -11,9 +11,14 @@ import Alamofire
 
 class APIClient {
     
-    static func auth(completion:@escaping ((Result<String, Error>))->Void) {
-        
+    static func sources(completion:@escaping ((Result<String, Error>))->Void) {
         AF.request(SourcesEndPoint.sources).responseString {(response) in
+            print("\(response)")
+        }
+    }
+    
+    static func searchNews(searchString : String, completion:@escaping ((Result<String, Error>))->Void) {
+        AF.request(EverythingEndPoint.search(searchString: searchString)).responseString { (response) in
             print("\(response)")
         }
     }

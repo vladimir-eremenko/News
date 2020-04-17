@@ -44,25 +44,24 @@ enum SourcesEndPoint: APIConfiguration {
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         
+        // Parameters
+        do {
+            let parameterEncoding = URLEncoding()
+            urlRequest = try parameterEncoding.encode(urlRequest, with: parameters)
+        } catch {
+            throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
+        }
+        
         // HTTP Method
         urlRequest.httpMethod = method.rawValue
         
         // Auth Header
-         urlRequest.setValue(ApiStruct.APIParameterKey.apiKey, forHTTPHeaderField: HTTPHeaderField.xapikey.rawValue)
+         urlRequest.setValue(ApiStruct.APIKey.apiKey, forHTTPHeaderField: HTTPHeaderField.xapikey.rawValue)
         
         
         // Common Headers
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
- 
-        // Parameters
-        if let parameters = parameters {
-            do {
-                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
-            } catch {
-                throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
-            }
-        }
         
         return urlRequest
     }

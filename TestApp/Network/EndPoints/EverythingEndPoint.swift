@@ -11,12 +11,12 @@ import Alamofire
 
 enum EverythingEndPoint: APIConfiguration {
     
-    case auth
+    case search(searchString: String)
     
     // MARK: - HTTPMethod
     var method: HTTPMethod {
         switch self {
-        case .auth:
+        case .search:
             return .get
        
         }
@@ -25,16 +25,16 @@ enum EverythingEndPoint: APIConfiguration {
     // MARK: - Path
     var path: String {
         switch self {
-        case .auth:
-            return ""
+        case .search:
+            return "/everything"
         }
     }
     
     // MARK: - Parameters
     var parameters: Parameters? {
         switch self {
-        case .auth :
-            return nil
+        case .search(let searchString) :
+            return [ApiStruct.APIParameterKey.searchKey : searchString]
         }
     }
     
@@ -44,22 +44,23 @@ enum EverythingEndPoint: APIConfiguration {
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         
+        // Parameters
+        do {
+            let parameterEncoding = URLEncoding()
+            urlRequest = try parameterEncoding.encode(urlRequest, with: parameters)
+        } catch {
+            throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
+        }
+        
         // HTTP Method
         urlRequest.httpMethod = method.rawValue
+        
+        //Auth header
+        urlRequest.setValue(ApiStruct.APIKey.apiKey, forHTTPHeaderField: HTTPHeaderField.xapikey.rawValue)
         
         // Common Headers
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
-        urlRequest.setValue(ApiStruct.APIParameterKey.apiKey, forHTTPHeaderField: HTTPHeaderField.xapikey.rawValue)
- 
-        // Parameters
-        if let parameters = parameters {
-            do {
-                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
-            } catch {
-                throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
-            }
-        }
         
         return urlRequest
     }

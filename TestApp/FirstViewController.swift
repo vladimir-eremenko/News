@@ -13,7 +13,11 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APIClient.auth { (result) in
+        APIClient.sources { (result) in
+            print("")
+        }
+        
+        APIClient.searchNews(searchString: "apple") { (result) in
             print("")
         }
         // Do any additional setup after loading the view.

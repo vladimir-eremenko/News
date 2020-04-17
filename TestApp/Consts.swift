@@ -13,8 +13,12 @@ struct ApiStruct {
         static let baseURL = "http://newsapi.org/v2"
     }
     
-    struct APIParameterKey {
+    struct APIKey {
         static let apiKey = "d0e1f08304b74a7bb94c1aed42dc1c2a"
+    }
+    
+    struct APIParameterKey {
+        static let searchKey = "q"
     }
 }
 
