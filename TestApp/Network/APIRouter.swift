@@ -15,4 +15,6 @@ protocol APIConfiguration: URLRequestConvertible {
     var parameters: Parameters? { get }
 }
 
-struct AppError: Error { }
+enum AppError: Error {
+   case invalidResponse
+}

@@ -13,14 +13,17 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APIClient.sources { (result) in
-            print("")
-        }
+        let service = DataService()
         
-        APIClient.searchNews(searchString: "apple") { (result) in
-            print("")
+        service.fetchSources {(result) in
+            switch result {
+                case .failure(let error) :
+                    print("\(error)")
+
+                case .success(let result) :
+                    print("\(result)")
+            }
         }
-        // Do any additional setup after loading the view.
     }
 
 
