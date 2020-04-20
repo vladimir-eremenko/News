@@ -9,23 +9,26 @@
 import UIKit
 
 class FirstViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
 
+    var adapter : SourceListAdapter!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.adapter = SourceListAdapter()
+        self.adapter.tableView = self.tableView
         let service = DataService()
         
-        service.fetchSources {(result) in
+        service.fetchSources {[weak weakSelf = self] (result) in
             switch result {
                 case .failure(let error) :
                     print("\(error)")
 
                 case .success(let result) :
-                    print("\(result)")
+                    weakSelf?.adapter.reloadData(dataSource: result)
             }
         }
     }
-
-
 }
 
