@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class SourceListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -18,9 +18,10 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         self.adapter = SourceListAdapter()
         self.adapter.tableView = self.tableView
-        let service = DataService()
         
-        service.fetchSources {[weak weakSelf = self] (result) in
+        NotificationCenter.default.addObserver(self, selector: #selector(dataSourceChanged), name: .favoriteSourceRemoved, object: nil)
+        
+        DataService.shared.fetchSources {[weak weakSelf = self] (result) in
             switch result {
                 case .failure(let error) :
                     print("\(error)")
@@ -29,6 +30,10 @@ class FirstViewController: UIViewController {
                     weakSelf?.adapter.reloadData(dataSource: result)
             }
         }
+    }
+    
+    @objc func dataSourceChanged() {
+           self.adapter.reloadData(dataSource: DataService.shared.sources)
     }
 }
 

@@ -11,23 +11,19 @@ import ObjectMapper
 import RealmSwift
 import ObjectMapper_Realm
 
-class Source : Object, Mappable {
+class Source : Mappable {
     
-    @objc dynamic var id : String = ""
-    @objc dynamic var name : String = ""
-    @objc dynamic var sourceDesc : String = ""
-    @objc dynamic var url : String = ""
-    @objc dynamic var category : String = ""
-    @objc dynamic var language : String = ""
-    @objc dynamic var country : String = ""
-    @objc dynamic var isFavorite : Bool = false
+    var id : String = ""
+    var name : String = ""
+    var sourceDesc : String = ""
+    var url : String = ""
+    var category : String = ""
+    var language : String = ""
+    var country : String = ""
+    var isFavorite : Bool = false
     
     required convenience init?(map: Map) {
         self.init()
-    }
-    
-    override class func primaryKey() -> String? {
-        return "id"
     }
     
     func mapping(map: Map) {
@@ -38,5 +34,11 @@ class Source : Object, Mappable {
         category <- map["category"]
         language <- map["language"]
         country <- map["country"]
+    }
+}
+
+extension Source: Equatable {
+    static func ==(lhs: Source, rhs: Source) -> Bool {
+        return lhs.id == rhs.id
     }
 }

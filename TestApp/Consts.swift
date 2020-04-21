@@ -8,6 +8,15 @@
 
 import Foundation
 
+struct Constants {
+    static let favoritesArrayKey = "favoritesArrayKey"
+}
+
+extension Notification.Name {
+    static let favoriteSourceAdded = Notification.Name("favoriteSourceAdded")
+    static let favoriteSourceRemoved = Notification.Name("favoriteSourceRemoved")
+}
+
 struct ApiStruct {
     struct ProductionServer {
         static let baseURL = "http://newsapi.org/v2"
