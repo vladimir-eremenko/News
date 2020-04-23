@@ -15,6 +15,7 @@ struct Constants {
 extension Notification.Name {
     static let favoriteSourceAdded = Notification.Name("favoriteSourceAdded")
     static let favoriteSourceRemoved = Notification.Name("favoriteSourceRemoved")
+    static let searchTapped = Notification.Name("searchTapped")
 }
 
 struct ApiStruct {

@@ -1,15 +1,15 @@
 //
-//  FavoriteSourceListAdapter.swift
+//  SourceListAdapter.swift
 //  TestApp
 //
-//  Created by vladimir on 21.04.2020.
+//  Created by vladimir on 20.04.2020.
 //  Copyright © 2020 vladimir. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-final class FavoriteSourceListAdapter: NSObject {
+final class SourceListAdapter: NSObject, SourceCellDelegate {
     
     private var dataSource: [Source] = []
     weak var tableView: UITableView? {
@@ -32,14 +32,14 @@ final class FavoriteSourceListAdapter: NSObject {
         self.tableView?.reloadData()
     }
     
-    func removeItem(at index: Int) {
-        let source = dataSource[index]
-        DataService.shared.removeFavorite(source: source)
-        dataSource.remove(at: index)
+    func sourceCellFavoriteTapped(_ sourceCell: SourceCell, subscribeButtonTappedFor item: Source) {
+        item.isFavorite = true
+        DataService.shared.saveFavorite(source: item)
+        NotificationCenter.default.post(name: .favoriteSourceAdded, object: nil)
     }
 }
 
-extension FavoriteSourceListAdapter: UITableViewDataSource {
+extension SourceListAdapter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSource.count
     }
@@ -48,18 +48,7 @@ extension FavoriteSourceListAdapter: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SourceCell.identifier, for: indexPath) as! SourceCell
         let displayItem = self.dataSource[indexPath.row]
         cell.item = displayItem
+        cell.delegate = self
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-          switch editingStyle {
-          case .delete:
-            self.removeItem(at: indexPath.row)
-              tableView.deleteRows(at: [indexPath], with: .fade)
-          case .insert, .none:
-              break
-          @unknown default:
-              fatalError("UITableView commit editingStyle issue!")
-          }
     }
 }

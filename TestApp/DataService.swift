@@ -51,6 +51,22 @@ final class DataService  {
         }
     }
     
+    func searchNewsForString(searchString: String, completion :  @escaping (Result<[News], Error>) -> Void) {
+        APIClient.searchNews(searchString: searchString) { (result) in
+            switch result {
+               case .failure(let error):
+                   completion(.failure(error))
+               case .success(let resultArray):
+                guard let news = Mapper<News>().mapArray(JSONObject: resultArray) else {
+                    let error : Error = AppError.invalidResponse
+                    completion(.failure(error))
+                    return
+                }
+                completion(.success(news))
+            }
+        }
+    }
+    
     private func appendIsFavoriteTo(array: [Source]) {
         let defaults = UserDefaults.standard
         favoriteSourceIds =  defaults.object(forKey: Constants.favoritesArrayKey) as? [String] ?? [String]()
@@ -71,8 +87,6 @@ final class DataService  {
         defaults.set(favoriteSourceIds, forKey: Constants.favoritesArrayKey)
         
         self.favoriteSources.append(source)
-        
-        NotificationCenter.default.post(name: .favoriteSourceAdded, object: nil)
     }
     
     func removeFavorite(source: Source) {
@@ -86,6 +100,5 @@ final class DataService  {
         if let index = self.favoriteSources.firstIndex(of: source) {
             self.favoriteSources.remove(at: index)
         }
-        NotificationCenter.default.post(name: .favoriteSourceRemoved, object: nil)
     }
 }

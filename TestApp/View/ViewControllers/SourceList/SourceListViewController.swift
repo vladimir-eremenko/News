@@ -33,7 +33,7 @@ class SourceListViewController: UIViewController {
     }
     
     @objc func dataSourceChanged() {
-           self.adapter.reloadData(dataSource: DataService.shared.sources)
+        self.adapter.reloadData(dataSource: DataService.shared.sources)
     }
 }
 

@@ -27,23 +27,20 @@ class APIClient {
                 completion(.failure(error))
             }
         }
-        
-//        AF.request(SourcesEndPoint.sources).responseString {(response) in
-//            guard let responseString = response.value else {
-//                completion(.failure(response.error!))
-//                return
-//            }
-//            completion(.success(responseString))
-//        }
     }
     
-    static func searchNews(searchString : String, completion:@escaping ((Result<String, Error>))->Void) {
-        AF.request(EverythingEndPoint.search(searchString: searchString)).responseString { (response) in
-            guard let responseString = response.value else {
-                completion(.failure(response.error!))
-                return
+    static func searchNews(searchString : String, completion:@escaping ((Result<[Any], Error>))->Void) {
+        AF.request(EverythingEndPoint.search(searchString: searchString)).responseJSON { (response) in
+            switch (response.result){
+            case .success:
+                
+                let responseDict = response.value as! Dictionary<String, Any>
+                let resultArray = responseDict["articles"] as! [Any]
+                
+                completion(.success(resultArray))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            completion(.success(responseString))
         }
     }
 }

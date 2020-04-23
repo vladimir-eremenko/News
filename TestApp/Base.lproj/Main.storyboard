@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,19 +72,53 @@
         <!--Search-->
         <scene sceneID="Pa9-FZ-cG4">
             <objects>
-                <viewController id="p0D-wG-Fid" sceneMemberID="viewController">
+                <viewController id="p0D-wG-Fid" customClass="SearchScreenViewController" customModule="TestApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h2m-3z-b0p">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qon-wf-OhY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cNt-Dc-Hka">
+                                <rect key="frame" x="0.0" y="100" width="414" height="713"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NrG-cR-h9q">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cNt-Dc-Hka" firstAttribute="top" secondItem="Qon-wf-OhY" secondAttribute="bottom" id="5VE-ul-PVr"/>
+                            <constraint firstItem="QVS-HV-9sa" firstAttribute="bottom" secondItem="cNt-Dc-Hka" secondAttribute="bottom" id="7jZ-lB-q64"/>
+                            <constraint firstItem="Qon-wf-OhY" firstAttribute="top" secondItem="QVS-HV-9sa" secondAttribute="top" id="A74-Vc-lkl"/>
+                            <constraint firstItem="Qon-wf-OhY" firstAttribute="trailing" secondItem="QVS-HV-9sa" secondAttribute="trailing" id="Hhv-fg-5DY"/>
+                            <constraint firstItem="Qon-wf-OhY" firstAttribute="leading" secondItem="QVS-HV-9sa" secondAttribute="leading" id="Tq6-xa-X8c"/>
+                            <constraint firstItem="cNt-Dc-Hka" firstAttribute="leading" secondItem="QVS-HV-9sa" secondAttribute="leading" id="XOy-Ay-OW1"/>
+                            <constraint firstItem="QVS-HV-9sa" firstAttribute="trailing" secondItem="cNt-Dc-Hka" secondAttribute="trailing" id="eIW-sr-sAy"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="QVS-HV-9sa"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" id="yxb-NR-bYJ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="cNt-Dc-Hka" id="nrr-i5-J4w"/>
+                        <outlet property="searchBar" destination="Qon-wf-OhY" id="n1S-ly-2mW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygm-pL-4iH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1471" y="0.0"/>
+            <point key="canvasLocation" x="1469.5652173913045" y="0.0"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">

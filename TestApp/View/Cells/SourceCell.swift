@@ -31,6 +31,7 @@ class SourceCell : UITableViewCell {
             favoriteButton.isEnabled = !item.isFavorite
         }
     }
+    
     @IBAction func subscribeButtonTapped(_ sender: UIButton){
        // ask the delegate (in most case, its the view controller) to
        // call the function 'subscribeButtonTappedFor' on itself.
