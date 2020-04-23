@@ -12,13 +12,15 @@ import Alamofire
 enum EverythingEndPoint: APIConfiguration {
     
     case search(searchString: String)
+    case newsOf(sources: [String])
     
     // MARK: - HTTPMethod
     var method: HTTPMethod {
         switch self {
         case .search:
             return .get
-       
+        case .newsOf:
+            return .get
         }
     }
     
@@ -26,6 +28,8 @@ enum EverythingEndPoint: APIConfiguration {
     var path: String {
         switch self {
         case .search:
+            return "/everything"
+        case .newsOf:
             return "/everything"
         }
     }
@@ -35,6 +39,12 @@ enum EverythingEndPoint: APIConfiguration {
         switch self {
         case .search(let searchString) :
             return [ApiStruct.APIParameterKey.searchKey : searchString]
+        case .newsOf(let sourceIds):
+            var paramStr = ""
+            for sourceId in sourceIds {
+                paramStr.append("\(sourceId),")
+            }
+            return [ApiStruct.APIParameterKey.sourcesKey : paramStr]
         }
     }
     

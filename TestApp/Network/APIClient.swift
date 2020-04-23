@@ -43,4 +43,20 @@ class APIClient {
             }
         }
     }
+    
+    static func newsOfSources(sourceIds: [String], completion:@escaping ((Result<[Any], Error>))->Void) {
+        
+        AF.request(EverythingEndPoint.newsOf(sources: sourceIds)).responseJSON { (response) in
+            switch (response.result){
+            case .success:
+                
+                let responseDict = response.value as! Dictionary<String, Any>
+                let resultArray = responseDict["articles"] as! [Any]
+                
+                completion(.success(resultArray))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

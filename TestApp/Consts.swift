@@ -29,6 +29,7 @@ struct ApiStruct {
     
     struct APIParameterKey {
         static let searchKey = "q"
+        static let sourcesKey = "sources"
     }
 }
 

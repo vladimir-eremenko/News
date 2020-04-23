@@ -1,15 +1,15 @@
 //
-//  SearchScreenAdapter.swift
+//  FavouriteSourceNewsAdapter.swift
 //  TestApp
 //
-//  Created by vladimir on 22.04.2020.
+//  Created by vladimir on 23.04.2020.
 //  Copyright © 2020 vladimir. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-final class SearchScreenAdapter: NSObject {
+final class FavouriteSourceNewsAdapter: NSObject {
     
     private var dataSource: [News] = []
     weak var collectionView: UICollectionView? {
@@ -19,12 +19,6 @@ final class SearchScreenAdapter: NSObject {
             self.collectionView?.dataSource = self
             self.collectionView?.collectionViewLayout = NewsCollectionViewLayout()
             self.collectionView?.reloadData()
-        }
-    }
-    
-    weak var searchBar: UISearchBar? {
-        didSet {
-            self.searchBar?.delegate = self
         }
     }
     
@@ -40,7 +34,7 @@ final class SearchScreenAdapter: NSObject {
     }
 }
 
-extension SearchScreenAdapter: UICollectionViewDataSource {
+extension FavouriteSourceNewsAdapter: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.dataSource.count
     }
@@ -50,11 +44,5 @@ extension SearchScreenAdapter: UICollectionViewDataSource {
         let news = self.dataSource[indexPath.row]
         cell.item = news
         return cell
-    }
-}
-
-extension SearchScreenAdapter: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        NotificationCenter.default.post(name: .searchTapped, object: nil)
     }
 }

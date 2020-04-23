@@ -67,6 +67,28 @@ final class DataService  {
         }
     }
     
+    func newsOfFavourite(completion :  @escaping (Result<[News], Error>) -> Void) {
+        self.newsOf(sourceIds: self.favoriteSourceIds) { (result) in
+            completion(result)
+        }
+    }
+    
+    func newsOf(sourceIds: [String], completion :  @escaping (Result<[News], Error>) -> Void) {
+        APIClient.newsOfSources(sourceIds: sourceIds) { (result) in
+            switch result {
+               case .failure(let error):
+                   completion(.failure(error))
+               case .success(let resultArray):
+                guard let news = Mapper<News>().mapArray(JSONObject: resultArray) else {
+                    let error : Error = AppError.invalidResponse
+                    completion(.failure(error))
+                    return
+                }
+                completion(.success(news))
+            }
+        }
+    }
+    
     private func appendIsFavoriteTo(array: [Source]) {
         let defaults = UserDefaults.standard
         favoriteSourceIds =  defaults.object(forKey: Constants.favoritesArrayKey) as? [String] ?? [String]()
