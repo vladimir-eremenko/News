@@ -1,15 +1,15 @@
 //
-//  SourceListAdapter.swift
+//  FavoriteSourceListAdapter.swift
 //  TestApp
 //
-//  Created by vladimir on 20.04.2020.
+//  Created by vladimir on 21.04.2020.
 //  Copyright © 2020 vladimir. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-final class SourceListAdapter: NSObject, SourceCellDelegate {
+final class FavoriteSourceListAdapter: NSObject {
     
     private var dataSource: [Source] = []
     weak var tableView: UITableView? {
@@ -32,14 +32,15 @@ final class SourceListAdapter: NSObject, SourceCellDelegate {
         self.tableView?.reloadData()
     }
     
-    func sourceCellFavoriteTapped(_ sourceCell: SourceCell, subscribeButtonTappedFor item: Source) {
-        item.isFavorite = true
-        DataService.shared.saveFavorite(source: item)
-        NotificationCenter.default.post(name: .favoriteSourceAdded, object: nil)
+    func removeItem(at index: Int) {
+        let source = dataSource[index]
+        dataSource.remove(at: index)
+        DataService.shared.removeFavorite(source: source)
+        NotificationCenter.default.post(name: .favoriteSourceRemoved, object: nil)
     }
 }
 
-extension SourceListAdapter: UITableViewDataSource {
+extension FavoriteSourceListAdapter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSource.count
     }
@@ -47,8 +48,19 @@ extension SourceListAdapter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SourceCell.identifier, for: indexPath) as! SourceCell
         let displayItem = self.dataSource[indexPath.row]
-        cell.item = displayItem
-        cell.delegate = self
+//        cell.item = displayItem
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+          switch editingStyle {
+          case .delete:
+            self.removeItem(at: indexPath.row)
+              tableView.deleteRows(at: [indexPath], with: .fade)
+          case .insert, .none:
+              break
+          @unknown default:
+              fatalError("UITableView commit editingStyle issue!")
+          }
     }
 }

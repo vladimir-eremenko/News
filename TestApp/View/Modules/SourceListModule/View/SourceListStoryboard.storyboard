@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Af3-Cw-DQa">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Channels-->
+        <scene sceneID="hzz-U2-6Sz">
+            <objects>
+                <viewController id="Af3-Cw-DQa" customClass="SourceListViewController" customModule="TestApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FOu-6C-sKp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="V0g-C4-da5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="V0g-C4-da5" firstAttribute="leading" secondItem="LMA-xC-YWE" secondAttribute="leading" id="Atw-bG-TYN"/>
+                            <constraint firstItem="V0g-C4-da5" firstAttribute="top" secondItem="LMA-xC-YWE" secondAttribute="top" id="CH7-J8-nUX"/>
+                            <constraint firstItem="LMA-xC-YWE" firstAttribute="bottom" secondItem="V0g-C4-da5" secondAttribute="bottom" id="jqL-GM-vb0"/>
+                            <constraint firstItem="LMA-xC-YWE" firstAttribute="trailing" secondItem="V0g-C4-da5" secondAttribute="trailing" id="x8p-Hh-67B"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LMA-xC-YWE"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Channels" image="first" id="oJv-Nq-21O"/>
+                    <connections>
+                        <outlet property="tableView" destination="V0g-C4-da5" id="vGl-la-EJl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zS3-ue-7rv" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749" y="-557"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+    </resources>
+</document>

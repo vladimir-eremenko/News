@@ -14,13 +14,19 @@ protocol SourceCellDelegate: AnyObject {
 }
 
 class SourceCell : UITableViewCell {
+    struct SourceDisplayItem {
+        let name: String
+        let sourceDesc: String
+        let isFavorite: Bool
+    }
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var favoriteButton : UIButton!
     
     weak var delegate : SourceCellDelegate?
     
-    var item: Source? {
+    var item: SourceDisplayItem? {
         didSet {
             guard let item = item else {
                 return
@@ -33,12 +39,10 @@ class SourceCell : UITableViewCell {
     }
     
     @IBAction func subscribeButtonTapped(_ sender: UIButton){
-       // ask the delegate (in most case, its the view controller) to
-       // call the function 'subscribeButtonTappedFor' on itself.
-        self.favoriteButton.isEnabled = false
-       if let item  = item, let delegate = delegate {
-           delegate.sourceCellFavoriteTapped(self, subscribeButtonTappedFor: item)
-       }
+//        self.favoriteButton.isEnabled = false
+//       if let item  = item, let delegate = delegate {
+//           delegate.sourceCellFavoriteTapped(self, subscribeButtonTappedFor: item)
+//       }
      }
     
     static var nib:UINib {

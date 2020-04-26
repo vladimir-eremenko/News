@@ -12,9 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var rootController: UITabBarController {
+        return self.window!.rootViewController as! UITabBarController
+    }
+    var applicationCoordinator: Coordinatable!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        self.applicationCoordinator = TabbarCoordinator(root: rootController)
+        self.applicationCoordinator.start()
+        
         return true
     }
 
