@@ -95,7 +95,7 @@ final class DataService  {
         if favoriteSourceIds.count == 0 {return}
         for item in array {
             let itemId = item.id
-            if favoriteSourceIds.contains(itemId) {
+            if favoriteSourceIds.contains(itemId) && !self.favoriteSources.contains(item) {
                 item.isFavorite = true
                 self.favoriteSources.append(item)
             }

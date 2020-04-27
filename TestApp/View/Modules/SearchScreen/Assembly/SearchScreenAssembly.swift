@@ -16,7 +16,7 @@ struct SearchScreenAssembly {
         
         viewController.output = SearchScreenPresenter(view: viewController)
         viewController.adapter = SearchScreenAdapter()
-//        viewController.adapter.delegate = viewController.output as? SourceListAdapterDelegate
+        viewController.adapter.delegate = viewController.output as? SearchScreenAdapterDelegate
         return viewController.output as? SearchScreenModuleInput
     }
 }

@@ -31,6 +31,20 @@ extension SearchScreenPresenter: SearchScreenViewOutput {
     }
 }
 
-//extension SearchScreenPresenter: SourceListAdapterDelegate {
-//
-//}
+extension SearchScreenPresenter: SearchScreenAdapterDelegate {
+    func searchFor(text: String) {
+        DataService.shared.searchNewsForString(searchString: text, completion: { [weak weakSelf = self] (result) in
+                   switch result {
+                       case .failure(let error) :
+                           print("\(error)")
+
+                       case .success(let result) :
+                            
+                           weakSelf?.dataSource = result
+                           weakSelf?.view.showNews(self.dataSource.map({
+                            return NewsCollectionCell.NewsDisplayItem(title: $0.title, newsDesc: $0.newsDesc, imgUrl: $0.urlToImage)
+                           }))
+                   }
+               })
+    }
+}

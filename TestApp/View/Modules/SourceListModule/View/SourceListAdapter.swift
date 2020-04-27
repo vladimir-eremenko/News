@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol SourceListAdapterDelegate: AnyObject {
-   
+    func addToFavoriteSourceWithIndex(index: Int)
 }
 
 final class SourceListAdapter: NSObject {
@@ -37,12 +37,6 @@ final class SourceListAdapter: NSObject {
         self.dataSource = dataSource
         self.tableView?.reloadData()
     }
-    
-    func sourceCellFavoriteTapped(_ sourceCell: SourceCell, subscribeButtonTappedFor item: Source) {
-        item.isFavorite = true
-        DataService.shared.saveFavorite(source: item)
-        NotificationCenter.default.post(name: .favoriteSourceAdded, object: nil)
-    }
 }
 
 extension SourceListAdapter: UITableViewDataSource {
@@ -54,6 +48,16 @@ extension SourceListAdapter: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SourceCell.identifier, for: indexPath) as! SourceCell
         let displayItem = self.dataSource[indexPath.row]
         cell.item = displayItem
+        cell.delegate = self
         return cell
+    }
+}
+
+extension SourceListAdapter: SourceCellDelegate {
+    func sourceCellFavoriteTapped(_ sourceCell: SourceCell, subscribeButtonTappedFor item: SourceCell.SourceDisplayItem) {
+        
+        guard let index = self.tableView?.indexPath(for: sourceCell)?.row else {return}
+        
+        self.delegate?.addToFavoriteSourceWithIndex(index: index)
     }
 }

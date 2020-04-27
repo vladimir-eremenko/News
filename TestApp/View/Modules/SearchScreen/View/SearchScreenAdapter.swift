@@ -9,8 +9,13 @@
 import Foundation
 import UIKit
 
+protocol SearchScreenAdapterDelegate: AnyObject {
+    func searchFor(text: String)
+}
+
 final class SearchScreenAdapter: NSObject {
     
+    weak var delegate : SearchScreenAdapterDelegate?
     private var dataSource: [NewsCollectionCell.NewsDisplayItem] = []
     weak var collectionView: UICollectionView? {
         didSet {
@@ -35,6 +40,7 @@ final class SearchScreenAdapter: NSObject {
     }
     
     func reloadData(dataSource: [NewsCollectionCell.NewsDisplayItem]) {
+        self.collectionView?.setContentOffset(.zero, animated: true)
         self.dataSource = dataSource
         self.collectionView?.reloadData()
     }
@@ -55,6 +61,8 @@ extension SearchScreenAdapter: UICollectionViewDataSource {
 
 extension SearchScreenAdapter: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        NotificationCenter.default.post(name: .searchTapped, object: nil)
+        guard let searchText = searchBar.text else {return}
+        searchBar.endEditing(true)
+        self.delegate?.searchFor(text:searchText)
     }
 }

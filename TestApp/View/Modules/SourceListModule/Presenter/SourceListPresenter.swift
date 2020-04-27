@@ -55,5 +55,12 @@ extension SourceListPresenter: SourceListViewOutput {
 }
 
 extension SourceListPresenter: SourceListAdapterDelegate {
-    
+    func addToFavoriteSourceWithIndex(index: Int) {
+        let source = self.dataSource[index]
+        source.isFavorite = true
+        DataService.shared.saveFavorite(source: source)
+        self.view.showSources(self.dataSource.map({
+            return SourceCell.SourceDisplayItem(name: $0.name, sourceDesc: $0.sourceDesc, isFavorite: $0.isFavorite)
+        }))
+    }
 }

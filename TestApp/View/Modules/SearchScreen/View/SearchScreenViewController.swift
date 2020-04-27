@@ -19,27 +19,10 @@ class SearchScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.adapter = SearchScreenAdapter()
         self.adapter.collectionView = self.collectionView
         self.adapter.searchBar = self.searchBar
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(searchAction), name: .searchTapped, object: nil)
-        
+        self.output.viewDidLoad()
     }
-    
-//    @objc func searchAction() {
-//        guard let searchText = searchBar.text else {return}
-//        DataService.shared.searchNewsForString(searchString: searchText, completion: { [weak weakSelf = self] (result) in
-//                   switch result {
-//                       case .failure(let error) :
-//                           print("\(error)")
-//
-//                       case .success(let result) :
-//                           weakSelf?.adapter.reloadData(dataSource: result)
-//                   }
-//               })
-//    }
 }
 
 extension SearchScreenViewController: SearchScreenViewInput {

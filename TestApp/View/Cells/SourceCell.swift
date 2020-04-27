@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol SourceCellDelegate: AnyObject {
-  func sourceCellFavoriteTapped(_ sourceCell: SourceCell, subscribeButtonTappedFor item: Source)
+    func sourceCellFavoriteTapped(_ sourceCell: SourceCell, subscribeButtonTappedFor item: SourceCell.SourceDisplayItem)
 }
 
 class SourceCell : UITableViewCell {
@@ -39,10 +39,10 @@ class SourceCell : UITableViewCell {
     }
     
     @IBAction func subscribeButtonTapped(_ sender: UIButton){
-//        self.favoriteButton.isEnabled = false
-//       if let item  = item, let delegate = delegate {
-//           delegate.sourceCellFavoriteTapped(self, subscribeButtonTappedFor: item)
-//       }
+        self.favoriteButton.isEnabled = false
+       if let item  = item, let delegate = delegate {
+           delegate.sourceCellFavoriteTapped(self, subscribeButtonTappedFor: item)
+       }
      }
     
     static var nib:UINib {
