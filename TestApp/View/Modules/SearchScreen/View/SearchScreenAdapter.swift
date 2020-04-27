@@ -11,7 +11,7 @@ import UIKit
 
 final class SearchScreenAdapter: NSObject {
     
-    private var dataSource: [News] = []
+    private var dataSource: [NewsCollectionCell.NewsDisplayItem] = []
     weak var collectionView: UICollectionView? {
         didSet {
             self.collectionView?.register(UINib(nibName: NewsCollectionCell.identifier, bundle: nil), forCellWithReuseIdentifier: NewsCollectionCell.identifier)
@@ -34,7 +34,7 @@ final class SearchScreenAdapter: NSObject {
         }
     }
     
-    func reloadData(dataSource: [News]) {
+    func reloadData(dataSource: [NewsCollectionCell.NewsDisplayItem]) {
         self.dataSource = dataSource
         self.collectionView?.reloadData()
     }

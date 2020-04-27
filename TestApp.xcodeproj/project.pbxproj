@@ -45,6 +45,11 @@
 		8462D3AE245463430089DDC8 /* SourceListCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D3AD245463430089DDC8 /* SourceListCoodinator.swift */; };
 		8462D3B0245465080089DDC8 /* Coordinatble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D3AF245465080089DDC8 /* Coordinatble.swift */; };
 		8462D3B424548A560089DDC8 /* TabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D3B324548A560089DDC8 /* TabbarCoordinator.swift */; };
+		8462D3BC2456FB2E0089DDC8 /* SearchScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D3BB2456FB2E0089DDC8 /* SearchScreenAssembly.swift */; };
+		8462D3BE2456FB540089DDC8 /* SearchScreenModuleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D3BD2456FB540089DDC8 /* SearchScreenModuleIO.swift */; };
+		8462D3C02456FB620089DDC8 /* SearchScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D3BF2456FB620089DDC8 /* SearchScreenPresenter.swift */; };
+		8462D3C22456FC110089DDC8 /* SearchListViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D3C12456FC110089DDC8 /* SearchListViewIO.swift */; };
+		8462D3C424572AF90089DDC8 /* SearchScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462D3C324572AF90089DDC8 /* SearchScreenCoordinator.swift */; };
 		848D1FBF244B39A4001E4CF8 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848D1FBE244B39A4001E4CF8 /* DataService.swift */; };
 		848D1FC2244DC0F1001E4CF8 /* SourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848D1FC1244DC0F1001E4CF8 /* SourceCell.swift */; };
 		848D1FC4244DC100001E4CF8 /* SourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848D1FC3244DC100001E4CF8 /* SourceCell.xib */; };
@@ -106,6 +111,11 @@
 		8462D3AD245463430089DDC8 /* SourceListCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceListCoodinator.swift; sourceTree = "<group>"; };
 		8462D3AF245465080089DDC8 /* Coordinatble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatble.swift; sourceTree = "<group>"; };
 		8462D3B324548A560089DDC8 /* TabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarCoordinator.swift; sourceTree = "<group>"; };
+		8462D3BB2456FB2E0089DDC8 /* SearchScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenAssembly.swift; sourceTree = "<group>"; };
+		8462D3BD2456FB540089DDC8 /* SearchScreenModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenModuleIO.swift; sourceTree = "<group>"; };
+		8462D3BF2456FB620089DDC8 /* SearchScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenPresenter.swift; sourceTree = "<group>"; };
+		8462D3C12456FC110089DDC8 /* SearchListViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewIO.swift; sourceTree = "<group>"; };
+		8462D3C324572AF90089DDC8 /* SearchScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenCoordinator.swift; sourceTree = "<group>"; };
 		848D1FBE244B39A4001E4CF8 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		848D1FC1244DC0F1001E4CF8 /* SourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCell.swift; sourceTree = "<group>"; };
 		848D1FC3244DC100001E4CF8 /* SourceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SourceCell.xib; sourceTree = "<group>"; };
@@ -182,7 +192,6 @@
 				8419A81A24473E4D00F580E5 /* LaunchScreen.storyboard */,
 				8419A81D24473E4D00F580E5 /* Info.plist */,
 				8462D3A2245352080089DDC8 /* FavouriteSourceListStoryboard.storyboard */,
-				8462D3A4245352280089DDC8 /* SearchStoryboard.storyboard */,
 				8462D3A62453524A0089DDC8 /* FavouriteSourceNewsListStoryboard.storyboard */,
 			);
 			path = TestApp;
@@ -237,9 +246,9 @@
 		84212DE9245044AB004BED01 /* SearchScreen */ = {
 			isa = PBXGroup;
 			children = (
-				84212DF62450980F004BED01 /* NewsCollectionViewLayout.swift */,
-				84212DEA245044CC004BED01 /* SearchScreenViewController.swift */,
-				84212DF224508539004BED01 /* SearchScreenAdapter.swift */,
+				8462D3B52456FAC10089DDC8 /* Assembly */,
+				8462D3B92456FAFB0089DDC8 /* Presenter */,
+				8462D3BA2456FB060089DDC8 /* View */,
 			);
 			path = SearchScreen;
 			sourceTree = "<group>";
@@ -307,10 +316,40 @@
 			isa = PBXGroup;
 			children = (
 				8462D3AB245461270089DDC8 /* CommonCoordinator.swift */,
+				8462D3C324572AF90089DDC8 /* SearchScreenCoordinator.swift */,
 				8462D3AD245463430089DDC8 /* SourceListCoodinator.swift */,
 				8462D3B324548A560089DDC8 /* TabbarCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		8462D3B52456FAC10089DDC8 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				8462D3BB2456FB2E0089DDC8 /* SearchScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		8462D3B92456FAFB0089DDC8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8462D3BD2456FB540089DDC8 /* SearchScreenModuleIO.swift */,
+				8462D3BF2456FB620089DDC8 /* SearchScreenPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8462D3BA2456FB060089DDC8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84212DF62450980F004BED01 /* NewsCollectionViewLayout.swift */,
+				84212DEA245044CC004BED01 /* SearchScreenViewController.swift */,
+				84212DF224508539004BED01 /* SearchScreenAdapter.swift */,
+				8462D3A4245352280089DDC8 /* SearchStoryboard.storyboard */,
+				8462D3C12456FC110089DDC8 /* SearchListViewIO.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		848D1FC0244DC0A6001E4CF8 /* View */ = {
@@ -494,7 +533,11 @@
 				84212DE7244F1A42004BED01 /* FavoriteSourceListAdapter.swift in Sources */,
 				8462D3972452F06C0089DDC8 /* SourceListViewIO.swift in Sources */,
 				8462D3B424548A560089DDC8 /* TabbarCoordinator.swift in Sources */,
+				8462D3BC2456FB2E0089DDC8 /* SearchScreenAssembly.swift in Sources */,
+				8462D3C02456FB620089DDC8 /* SearchScreenPresenter.swift in Sources */,
 				8462D391245216E40089DDC8 /* SourceListAssembly.swift in Sources */,
+				8462D3C22456FC110089DDC8 /* SearchListViewIO.swift in Sources */,
+				8462D3C424572AF90089DDC8 /* SearchScreenCoordinator.swift in Sources */,
 				8419A83E2448723A00F580E5 /* EverythingEndPoint.swift in Sources */,
 				8462D38C2451D0110089DDC8 /* FavouriteSourceNewsAdapter.swift in Sources */,
 				8462D39F24534E2B0089DDC8 /* AppRouter.swift in Sources */,
@@ -511,6 +554,7 @@
 				8419A835244767C400F580E5 /* Consts.swift in Sources */,
 				848D1FC2244DC0F1001E4CF8 /* SourceCell.swift in Sources */,
 				8419A8332447653300F580E5 /* APIRouter.swift in Sources */,
+				8462D3BE2456FB540089DDC8 /* SearchScreenModuleIO.swift in Sources */,
 				848D1FBF244B39A4001E4CF8 /* DataService.swift in Sources */,
 				8419A81224473E4900F580E5 /* SourceListViewController.swift in Sources */,
 				8462D3B0245465080089DDC8 /* Coordinatble.swift in Sources */,

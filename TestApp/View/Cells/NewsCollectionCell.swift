@@ -11,11 +11,17 @@ import UIKit
 
 class NewsCollectionCell: UICollectionViewCell {
     
+    struct NewsDisplayItem {
+        let title: String
+        let newsDesc: String
+        let imgUrl: String
+    }
+    
     @IBOutlet weak var newsImage: UIImageView?
     @IBOutlet weak var newsTitle: UILabel?
     @IBOutlet weak var newsDescription: UILabel?
     
-    var item: News? {
+    var item: NewsDisplayItem? {
            didSet {
                guard let item = item else {
                    return
@@ -23,7 +29,7 @@ class NewsCollectionCell: UICollectionViewCell {
                
             newsTitle?.text = item.title
             newsDescription?.text = item.newsDesc
-            newsImage?.load(url: URL(string: item.urlToImage))
+            newsImage?.load(url: URL(string: item.imgUrl))
            }
        }
     

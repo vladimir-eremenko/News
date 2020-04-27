@@ -21,14 +21,14 @@ class FavouriteSourceNewsViewController: UIViewController {
         self.adapter = SearchScreenAdapter()
         self.adapter.collectionView = self.collectionView
         
-        DataService.shared.newsOfFavourite {[weak weakSelf = self] (result) in
-            switch result {
-                case .failure(let error) :
-                    print("\(error)")
-
-                case .success(let result) :
-                    weakSelf?.adapter.reloadData(dataSource: result)
-            }
-        }
+//        DataService.shared.newsOfFavourite {[weak weakSelf = self] (result) in
+//            switch result {
+//                case .failure(let error) :
+//                    print("\(error)")
+//
+//                case .success(let result) :
+//                    weakSelf?.adapter.reloadData(dataSource: result)
+//            }
+//        }
     }
 }

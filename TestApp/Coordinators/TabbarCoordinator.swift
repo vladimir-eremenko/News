@@ -18,14 +18,19 @@ final class TabbarCoordinator: CommonCoordinator {
     override func start() {
         super.start()
         
-        let sourceList = SourceListCoordinator(onlyFavorite: false)
-        let favoriteSourceList = SourceListCoordinator(onlyFavorite: true)
+        let sourceListCoordinator = SourceListCoordinator(onlyFavorite: false)
+        let favoriteSourceListCoordinator = SourceListCoordinator(onlyFavorite: true)
+        let searchScreenCoordinator = SearchScreenCoordinator()
         
-         sourceList.start()
-        favoriteSourceList.start()
+        sourceListCoordinator.start()
+        favoriteSourceListCoordinator.start()
+        searchScreenCoordinator.start()
         
+        sourceListCoordinator.rootController.tabBarItem = UITabBarItem(title: "Channels", image: UIImage(systemName: "list.bullet"), tag: 0)
+        favoriteSourceListCoordinator.rootController.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(systemName: "star.fill"), tag: 1)
+        searchScreenCoordinator.rootController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
         
-        self.rootViewController.viewControllers = [sourceList.rootController, favoriteSourceList.rootController]
+        self.rootViewController.viewControllers = [sourceListCoordinator.rootController, favoriteSourceListCoordinator.rootController, searchScreenCoordinator.rootController]
         
     }
 

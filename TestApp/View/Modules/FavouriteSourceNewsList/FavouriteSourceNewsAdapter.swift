@@ -42,7 +42,7 @@ extension FavouriteSourceNewsAdapter: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionCell.identifier, for: indexPath) as! NewsCollectionCell
         let news = self.dataSource[indexPath.row]
-        cell.item = news
+//        cell.item = news
         return cell
     }
 }
