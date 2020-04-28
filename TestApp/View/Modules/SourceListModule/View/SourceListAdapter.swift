@@ -11,11 +11,12 @@ import UIKit
 
 protocol SourceListAdapterDelegate: AnyObject {
     func addToFavoriteSourceWithIndex(index: Int)
+    func removeFavoriteSourceWithIndex(index: Int)
 }
 
-final class SourceListAdapter: NSObject {
+class SourceListAdapter: NSObject {
     
-    private var dataSource: [SourceCell.SourceDisplayItem] = []
+    var dataSource: [SourceCell.SourceDisplayItem] = []
     weak var delegate: SourceListAdapterDelegate?
     
     weak var tableView: UITableView? {

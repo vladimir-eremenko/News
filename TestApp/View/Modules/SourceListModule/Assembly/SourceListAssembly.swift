@@ -11,13 +11,12 @@ import UIKit
 
 struct SourceListAssembly {
     static func makeSourcesModule(showOnlyFavorites: Bool) -> SourcesListModuleInput? {
-        guard let viewController = UIStoryboard(name: "SourceListStoryboard", bundle: nil).instantiateInitialViewController() as? SourceListViewController
-        else { return nil }
         
-        viewController.output = SourceListPresenter(view: viewController, showOnlyFavorites: showOnlyFavorites)
-        viewController.adapter = SourceListAdapter()
-        viewController.adapter.delegate = viewController.output as? SourceListAdapterDelegate
-        return viewController.output as? SourcesListModuleInput
+        if showOnlyFavorites {
+            return self.makeFavoritesSourcesModule()
+        } else {
+            return self.makeSourcesModule()
+        }
     }
     
     static func makeSourcesModule() -> SourcesListModuleInput? {
@@ -34,8 +33,8 @@ struct SourceListAssembly {
         guard let viewController = UIStoryboard(name: "SourceListStoryboard", bundle: nil).instantiateInitialViewController() as? SourceListViewController
         else { return nil }
         
-        viewController.output = SourceListPresenter(view: viewController, showOnlyFavorites: true)
-        viewController.adapter = SourceListAdapter()
+        viewController.output = SourceListPresenter(onlyFavoritesView: viewController)
+        viewController.adapter = FavouriteSourceListAdapter()
         viewController.adapter.delegate = viewController.output as? SourceListAdapterDelegate
         return viewController.output as? SourcesListModuleInput
     }

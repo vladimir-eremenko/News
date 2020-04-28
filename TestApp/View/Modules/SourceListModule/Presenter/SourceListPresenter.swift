@@ -16,9 +16,9 @@ final class SourceListPresenter {
     private var showOnlyFavorites : Bool = false
     
     
-    init(view: SourceListViewInput, showOnlyFavorites: Bool) {
+    init(onlyFavoritesView view: SourceListViewInput) {
         self.view = view
-        self.showOnlyFavorites = showOnlyFavorites
+        self.showOnlyFavorites = true
     }
     
     init(view: SourceListViewInput) {
@@ -62,5 +62,10 @@ extension SourceListPresenter: SourceListAdapterDelegate {
         self.view.showSources(self.dataSource.map({
             return SourceCell.SourceDisplayItem(name: $0.name, sourceDesc: $0.sourceDesc, isFavorite: $0.isFavorite)
         }))
+    }
+    
+    func removeFavoriteSourceWithIndex(index: Int) {
+        DataService.shared.removeFavorite(source: self.dataSource[index])
+        self.dataSource.remove(at: index)
     }
 }
