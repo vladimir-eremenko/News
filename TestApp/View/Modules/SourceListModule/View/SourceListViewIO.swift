@@ -13,4 +13,6 @@ protocol SourceListViewInput: AnyObject {
 
 protocol SourceListViewOutput: AnyObject {
     func viewDidLoad()
+    func navBarButtonTapped()
+    func viewWillAppear()
 }

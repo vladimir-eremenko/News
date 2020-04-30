@@ -11,16 +11,17 @@ final class TabbarCoordinator: CommonCoordinator {
     
     private let rootViewController: UITabBarController
     
+    let sourceListCoordinator = SourceListCoordinator(onlyFavorite: false)
+    let favoriteSourceListCoordinator = SourceListCoordinator(onlyFavorite: true)
+    let searchScreenCoordinator = SearchScreenCoordinator()
+    
+    
     init(root: UITabBarController) {
         self.rootViewController = root
     }
     
     override func start() {
         super.start()
-        
-        let sourceListCoordinator = SourceListCoordinator(onlyFavorite: false)
-        let favoriteSourceListCoordinator = SourceListCoordinator(onlyFavorite: true)
-        let searchScreenCoordinator = SearchScreenCoordinator()
         
         sourceListCoordinator.start()
         favoriteSourceListCoordinator.start()
@@ -33,5 +34,11 @@ final class TabbarCoordinator: CommonCoordinator {
         self.rootViewController.viewControllers = [sourceListCoordinator.rootController, favoriteSourceListCoordinator.rootController, searchScreenCoordinator.rootController]
         
     }
-
 }
+
+//extension TabbarCoordinator: UITabBarControllerDelegate {
+//
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        print("\(viewController.tabBarItem.tag)")
+//    }
+//}

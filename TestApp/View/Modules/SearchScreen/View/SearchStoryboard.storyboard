@@ -15,16 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="q9t-ND-rV2">
-                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xqe-St-UbX">
-                                <rect key="frame" x="0.0" y="100" width="414" height="713"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lqi-2H-Rlm">
                                     <size key="itemSize" width="50" height="50"/>
@@ -37,13 +29,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="xqe-St-UbX" firstAttribute="top" secondItem="q9t-ND-rV2" secondAttribute="bottom" id="5rM-JN-PoQ"/>
-                            <constraint firstItem="q9t-ND-rV2" firstAttribute="leading" secondItem="owE-NX-ZPS" secondAttribute="leading" id="Jew-oE-tsc"/>
                             <constraint firstItem="owE-NX-ZPS" firstAttribute="bottom" secondItem="xqe-St-UbX" secondAttribute="bottom" id="KxH-6j-tX3"/>
+                            <constraint firstItem="xqe-St-UbX" firstAttribute="top" secondItem="owE-NX-ZPS" secondAttribute="top" id="KzM-zR-Zar"/>
                             <constraint firstItem="xqe-St-UbX" firstAttribute="leading" secondItem="owE-NX-ZPS" secondAttribute="leading" id="RwJ-Vg-trO"/>
                             <constraint firstItem="owE-NX-ZPS" firstAttribute="trailing" secondItem="xqe-St-UbX" secondAttribute="trailing" id="W5s-yP-I9g"/>
-                            <constraint firstItem="q9t-ND-rV2" firstAttribute="top" secondItem="owE-NX-ZPS" secondAttribute="top" id="pcU-Ty-Pjh"/>
-                            <constraint firstItem="q9t-ND-rV2" firstAttribute="trailing" secondItem="owE-NX-ZPS" secondAttribute="trailing" id="wGG-U5-QLw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="owE-NX-ZPS"/>
                     </view>
@@ -51,7 +40,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="xqe-St-UbX" id="T0Q-fK-AQa"/>
-                        <outlet property="searchBar" destination="q9t-ND-rV2" id="1Wg-xK-qM0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vz-HY-GTh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

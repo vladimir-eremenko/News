@@ -15,6 +15,7 @@ final class SourceListPresenter {
     private var dataSource: [Source] = []
     private var showOnlyFavorites : Bool = false
     
+    var finishFlow: EmptyCallback?
     
     init(onlyFavoritesView view: SourceListViewInput) {
         self.view = view
@@ -27,6 +28,7 @@ final class SourceListPresenter {
 }
 
 extension SourceListPresenter: SourcesListModuleInput {
+    
     func toPresent() -> UIViewController? {
         return self.view as? UIViewController
     }
@@ -51,6 +53,21 @@ extension SourceListPresenter: SourceListViewOutput {
                     }))
             }
         }
+    }
+    
+    func navBarButtonTapped() {
+        self.finishFlow?()
+    }
+    
+    func viewWillAppear() {
+        if (self.showOnlyFavorites) {
+            self.dataSource = DataService.shared.favoriteSources
+        } else {
+            self.dataSource = DataService.shared.sources
+        }
+        self.view.showSources(self.dataSource.map({
+            return SourceCell.SourceDisplayItem(name: $0.name, sourceDesc: $0.sourceDesc, isFavorite: $0.isFavorite)
+        }))
     }
 }
 

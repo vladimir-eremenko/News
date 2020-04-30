@@ -7,6 +7,6 @@
 //
 
 import Foundation
-protocol SearchScreenModuleInput: Presentable {}
+protocol SearchScreenModuleInput: Presentable, Finishable {}
 
-protocol SearchScreenModuleUotput {}
+protocol SearchScreenModuleOutput {}

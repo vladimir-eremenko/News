@@ -23,7 +23,7 @@ final class SearchScreenCoordinator: CommonCoordinator {
         guard let module : SearchScreenModuleInput = SearchScreenAssembly.makeSearchNewsmodule() else {
             fatalError("module initialization error") }
 
-        self.router.setRootModule(module)
+        self.router.setRootModule(module, hideBar: false)
     }
 
 }

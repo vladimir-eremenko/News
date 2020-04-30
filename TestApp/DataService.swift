@@ -28,8 +28,9 @@ final class DataService  {
                case .failure(let error):
                    completion(.failure(error))
                case .success(let resultArray):
-                self.sources = resultArray
-                    weakSelf?.appendIsFavoriteTo(array: resultArray)
+                    weakSelf?.sources = resultArray
+                    weakSelf?.appendIsFavorite()
+                    
                     completion(.success(resultArray))
             }
         }
@@ -89,15 +90,17 @@ final class DataService  {
         }
     }
     
-    private func appendIsFavoriteTo(array: [Source]) {
+    private func appendIsFavorite() {
         let defaults = UserDefaults.standard
         favoriteSourceIds =  defaults.object(forKey: Constants.favoritesArrayKey) as? [String] ?? [String]()
         if favoriteSourceIds.count == 0 {return}
-        for item in array {
+        for item in self.sources {
             let itemId = item.id
-            if favoriteSourceIds.contains(itemId) && !self.favoriteSources.contains(item) {
+            if favoriteSourceIds.contains(itemId){
                 item.isFavorite = true
-                self.favoriteSources.append(item)
+                if !self.favoriteSources.contains(item) {
+                    self.favoriteSources.append(item)
+                }
             }
         }
     }
@@ -114,6 +117,9 @@ final class DataService  {
     func removeFavorite(source: Source) {
         let sourceId = source.id
         source.isFavorite = false
+        if let index = self.sources.firstIndex(of: source) {
+            self.sources[index] = source
+        }
         if let index = self.favoriteSourceIds.firstIndex(of: sourceId) {
             self.favoriteSourceIds.remove(at: index)
             let defaults = UserDefaults.standard

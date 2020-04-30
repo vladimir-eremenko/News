@@ -9,5 +9,5 @@
 import Foundation
 protocol Coordinatable: AnyObject {
     func start()
-//    func runFlow(coordinator: Coordinatable, opening: @escaping EmptyCallback)
+    func runFlow(coordinator: Coordinatable & Finishable, opening: @escaping EmptyCallback)
 }

@@ -30,7 +30,7 @@ struct SourceListAssembly {
     }
     
     static func makeFavoritesSourcesModule() -> SourcesListModuleInput? {
-        guard let viewController = UIStoryboard(name: "SourceListStoryboard", bundle: nil).instantiateInitialViewController() as? SourceListViewController
+        guard let viewController = UIStoryboard(name: "FavouriteSourcesListStoryboard", bundle: nil).instantiateInitialViewController() as? FavouriteSourceListViewController
         else { return nil }
         
         viewController.output = SourceListPresenter(onlyFavoritesView: viewController)

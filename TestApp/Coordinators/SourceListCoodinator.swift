@@ -20,9 +20,36 @@ final class SourceListCoordinator: CommonCoordinator {
     override func start() {
         super.start()
 
-        guard let module : SourcesListModuleInput = SourceListAssembly.makeSourcesModule(showOnlyFavorites: onlyFavorite) else { fatalError("module initialization error") }
+        if self.onlyFavorite {
+            self.showOnlyFavouriteSources()
+        } else {
+            self.showSources()
+        }
+    }
+    
+    func showSources() {
+         guard let module : SourcesListModuleInput = SourceListAssembly.makeSourcesModule(showOnlyFavorites: onlyFavorite) else { fatalError("module initialization error") }
         
         self.router.setRootModule(module)
     }
-
+  
+    func showFavouriteNews() {
+        //here should be news list
+        guard let module : NewsListModuleInput = NewsListAssembly.makeNewsListModule() else {
+                   fatalError("module initialization error") }
+        
+        self.router.setRootModule(module, hideBar: false)
+        module.finishFlow = { [weak self] in
+            self?.showOnlyFavouriteSources()
+        }
+    }
+    
+    func showOnlyFavouriteSources() {
+        guard let module : SourcesListModuleInput = SourceListAssembly.makeSourcesModule(showOnlyFavorites: onlyFavorite) else { fatalError("module initialization error") }
+        
+        self.router.setRootModule(module, hideBar: false)
+        module.finishFlow = { [weak self] in
+            self?.showFavouriteNews()
+        }
+    }
 }

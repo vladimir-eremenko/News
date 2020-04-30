@@ -19,6 +19,11 @@ class SourceListViewController: UIViewController {
         self.adapter.tableView = self.tableView
         self.output.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.output.viewWillAppear()
+        super.viewWillAppear(animated)
+    }
 }
 
 extension SourceListViewController: SourceListViewInput {

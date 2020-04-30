@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol SourcesListModuleInput: Presentable {}
+protocol SourcesListModuleInput: Presentable, Finishable {}
 
 protocol SourcesListModuleOutput {}

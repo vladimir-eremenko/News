@@ -1,21 +1,21 @@
 //
-//  SearchScreenAdapter.swift
+//  NewsListAdapter.swift
 //  TestApp
 //
-//  Created by vladimir on 22.04.2020.
+//  Created by vladimir on 30.04.2020.
 //  Copyright © 2020 vladimir. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-protocol SearchScreenAdapterDelegate: AnyObject {
+protocol NewsListAdapterDelegate: AnyObject {
     func searchFor(text: String)
 }
 
-final class SearchScreenAdapter: NSObject {
+final class NewsListAdapter: NSObject {
     
-    weak var delegate : SearchScreenAdapterDelegate?
+    weak var delegate : NewsListAdapterDelegate?
     private var dataSource: [NewsCollectionCell.NewsDisplayItem] = []
     weak var collectionView: UICollectionView? {
         didSet {
@@ -24,6 +24,12 @@ final class SearchScreenAdapter: NSObject {
             self.collectionView?.dataSource = self
             self.collectionView?.collectionViewLayout = NewsCollectionViewLayout()
             self.collectionView?.reloadData()
+        }
+    }
+    
+    weak var searchBar: UISearchBar? {
+        didSet {
+//            self.searchBar?.delegate = self
         }
     }
     
@@ -40,7 +46,7 @@ final class SearchScreenAdapter: NSObject {
     }
 }
 
-extension SearchScreenAdapter: UICollectionViewDataSource {
+extension NewsListAdapter: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.dataSource.count
     }
@@ -53,10 +59,10 @@ extension SearchScreenAdapter: UICollectionViewDataSource {
     }
 }
 
-extension SearchScreenAdapter: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else {return}
-        if searchText.count == 0 {return}
-        self.delegate?.searchFor(text:searchText)
-    }
+extension NewsListAdapter: UISearchBarDelegate {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        guard let searchText = searchBar.text else {return}
+//        searchBar.endEditing(true)
+//        self.delegate?.searchFor(text:searchText)
+//    }
 }
