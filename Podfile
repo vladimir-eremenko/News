@@ -6,4 +6,6 @@ target 'TestApp' do
     pod 'ObjectMapper'
     pod 'RealmSwift'
     pod 'ObjectMapper+Realm'
+    pod 'SCLAlertView'
+    pod "SwiftSpinner"
 end

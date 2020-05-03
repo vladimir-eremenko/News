@@ -16,5 +16,6 @@ protocol APIConfiguration: URLRequestConvertible {
 }
 
 enum AppError: Error {
-   case invalidResponse
+    case invalidResponse
+    case invalidParameters
 }

@@ -15,6 +15,8 @@ protocol SearchScreenAdapterDelegate: AnyObject {
 
 final class SearchScreenAdapter: NSObject {
     
+    var timer: Timer?
+    
     weak var delegate : SearchScreenAdapterDelegate?
     private var dataSource: [NewsCollectionCell.NewsDisplayItem] = []
     weak var collectionView: UICollectionView? {
@@ -57,6 +59,14 @@ extension SearchScreenAdapter: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else {return}
         if searchText.count == 0 {return}
-        self.delegate?.searchFor(text:searchText)
+        timer?.invalidate()  // Cancel any previous timer
+
+        if searchText.count >= 2 {
+
+             // …schedule a timer for 0.5 seconds
+            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: {[weak weakSelf = self] (timer) in
+                weakSelf?.delegate?.searchFor(text: searchText)
+            })
+        }
     }
 }

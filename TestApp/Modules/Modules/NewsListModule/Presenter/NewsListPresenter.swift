@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SCLAlertView
 
 final class NewsListPresenter {
     
@@ -29,11 +30,13 @@ extension NewsListPresenter: NewsListModuleInput {
 
 extension NewsListPresenter: NewsListViewOutput {
     func viewDidLoad() {
+        self.view.showBusy()
         DataService.shared.newsOfFavourite(completion : { [weak weakSelf = self]
             (result) in
+            self.view.showReady()
                 switch result {
                     case .failure(let error) :
-                        print("\(error)")
+                        SCLAlertView().showError("Error", subTitle: error.localizedDescription)
 
                     case .success(let result) :
                          
@@ -57,7 +60,7 @@ extension NewsListPresenter: SearchScreenAdapterDelegate {
         DataService.shared.searchNewsForString(searchString: text, completion: { [weak weakSelf = self] (result) in
                    switch result {
                        case .failure(let error) :
-                           print("\(error)")
+                           SCLAlertView().showError("Error", subTitle: error.localizedDescription)
 
                        case .success(let result) :
                             

@@ -13,6 +13,7 @@ class FavouriteSourceListViewController: SourceListViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Favourites"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "News", style: .done, target: self, action: #selector(newsTapped))
     }
     

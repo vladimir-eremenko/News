@@ -46,6 +46,12 @@ class APIClient {
     
     static func newsOfSources(sourceIds: [String], completion:@escaping ((Result<[Any], Error>))->Void) {
         
+        if sourceIds.count == 0 {
+            let error : Error = AppError.invalidParameters
+            completion(.failure(error))
+            return
+        }
+        
         AF.request(EverythingEndPoint.newsOf(sources: sourceIds)).responseJSON { (response) in
             switch (response.result){
             case .success:

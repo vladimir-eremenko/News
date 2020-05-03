@@ -9,6 +9,8 @@
 import Foundation
 protocol SourceListViewInput: AnyObject {
     func showSources(_ list: [SourceCell.SourceDisplayItem])
+    func showBusy()
+    func showReady()
 }
 
 protocol SourceListViewOutput: AnyObject {

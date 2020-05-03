@@ -9,6 +9,8 @@
 import Foundation
 protocol NewsListViewInput: AnyObject {
     func showNews(_ list: [NewsCollectionCell.NewsDisplayItem])
+    func showBusy()
+    func showReady()
 }
 
 protocol NewsListViewOutput: AnyObject {

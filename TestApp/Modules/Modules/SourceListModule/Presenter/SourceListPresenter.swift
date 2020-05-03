@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SCLAlertView
 
 final class SourceListPresenter {
     
@@ -36,10 +37,12 @@ extension SourceListPresenter: SourcesListModuleInput {
 
 extension SourceListPresenter: SourceListViewOutput {
     func viewDidLoad() {
+        self.view.showBusy()
         DataService.shared.fetchSources {[weak weakSelf = self] (result) in
+            weakSelf?.view.showReady()
             switch result {
                 case .failure(let error) :
-                    print("\(error)")
+                    SCLAlertView().showError("Error", subTitle: error.localizedDescription)
 
                 case .success(let result) :
                     if (weakSelf?.showOnlyFavorites)! {

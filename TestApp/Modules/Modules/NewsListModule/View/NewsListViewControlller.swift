@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftSpinner
 
 class NewsListViewController: UIViewController {
 
@@ -32,5 +33,13 @@ class NewsListViewController: UIViewController {
 extension NewsListViewController: NewsListViewInput {
     func showNews(_ list: [NewsCollectionCell.NewsDisplayItem]) {
         self.adapter.reloadData(dataSource: list)
+    }
+    
+    func showBusy(){
+        SwiftSpinner.show("Loading...")
+    }
+    
+    func showReady(){
+        SwiftSpinner.hide()
     }
 }

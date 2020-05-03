@@ -9,6 +9,8 @@
 import Foundation
 protocol SearchScreenViewInput: AnyObject {
     func showNews(_ list: [NewsCollectionCell.NewsDisplayItem])
+    func showBusy()
+    func showReady()
 }
 
 protocol SearchScreenViewOutput: AnyObject {

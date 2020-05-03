@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 class SourceListViewController: UIViewController {
     
@@ -29,6 +30,14 @@ class SourceListViewController: UIViewController {
 extension SourceListViewController: SourceListViewInput {
     func showSources(_ list: [SourceCell.SourceDisplayItem]) {
         self.adapter.reloadData(dataSource: list)
+    }
+    
+    func showBusy(){
+        SwiftSpinner.show("Loading")
+    }
+    
+    func showReady(){
+        SwiftSpinner.hide()
     }
 }
 

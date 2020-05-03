@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftSpinner
 
 class SearchScreenViewController: UIViewController {
 
@@ -39,5 +40,13 @@ class SearchScreenViewController: UIViewController {
 extension SearchScreenViewController: SearchScreenViewInput {
     func showNews(_ list: [NewsCollectionCell.NewsDisplayItem]) {
         self.adapter.reloadData(dataSource: list)
+    }
+    
+    func showBusy(){
+        SwiftSpinner.show("Loading")
+    }
+    
+    func showReady(){
+        SwiftSpinner.hide()
     }
 }
