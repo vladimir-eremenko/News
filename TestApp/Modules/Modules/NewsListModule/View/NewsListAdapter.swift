@@ -9,13 +9,7 @@
 import Foundation
 import UIKit
 
-protocol NewsListAdapterDelegate: AnyObject {
-    func searchFor(text: String)
-}
-
 final class NewsListAdapter: NSObject {
-    
-    weak var delegate : NewsListAdapterDelegate?
     private var dataSource: [NewsCollectionCell.NewsDisplayItem] = []
     weak var collectionView: UICollectionView? {
         didSet {
@@ -24,12 +18,6 @@ final class NewsListAdapter: NSObject {
             self.collectionView?.dataSource = self
             self.collectionView?.collectionViewLayout = NewsCollectionViewLayout()
             self.collectionView?.reloadData()
-        }
-    }
-    
-    weak var searchBar: UISearchBar? {
-        didSet {
-//            self.searchBar?.delegate = self
         }
     }
     
@@ -57,12 +45,4 @@ extension NewsListAdapter: UICollectionViewDataSource {
         cell.item = news
         return cell
     }
-}
-
-extension NewsListAdapter: UISearchBarDelegate {
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let searchText = searchBar.text else {return}
-//        searchBar.endEditing(true)
-//        self.delegate?.searchFor(text:searchText)
-//    }
 }

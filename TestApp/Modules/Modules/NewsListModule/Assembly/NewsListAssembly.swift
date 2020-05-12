@@ -16,7 +16,6 @@ struct NewsListAssembly {
         
         viewController.output = NewsListPresenter(view: viewController)
         viewController.adapter = NewsListAdapter()
-        viewController.adapter.delegate = viewController.output as? NewsListAdapterDelegate
         return viewController.output as? NewsListModuleInput
     }
 }

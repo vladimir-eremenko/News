@@ -54,21 +54,3 @@ extension NewsListPresenter: NewsListViewOutput {
            self.finishFlow?()
        }
 }
-
-extension NewsListPresenter: SearchScreenAdapterDelegate {
-    func searchFor(text: String) {
-        DataService.shared.searchNewsForString(searchString: text, completion: { [weak weakSelf = self] (result) in
-                   switch result {
-                       case .failure(let error) :
-                           SCLAlertView().showError("Error", subTitle: error.localizedDescription)
-
-                       case .success(let result) :
-                            
-                           weakSelf?.dataSource = result
-                           weakSelf?.view.showNews(self.dataSource.map({
-                            return NewsCollectionCell.NewsDisplayItem(title: $0.title, newsDesc: $0.newsDesc, imgUrl: $0.urlToImage)
-                           }))
-                   }
-               })
-    }
-}
